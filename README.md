@@ -7,8 +7,8 @@ This project implements a hybrid **Enhanced Simulated Annealing (ESA)** algorith
 * **Hybrid Algorithm:** Combines the global search capability of Simulated Annealing with a **Numba-accelerated 2-opt** local search for rapid exploitation.
 * **Adaptive Reheating:** Automatically detects solution stagnation and triggers a "reheating" phase (temperature reset + strong perturbation) to escape deep local optima.
 * **Parallel Execution:** Leverages multi-core processing using `joblib` to benchmark multiple TSP instances simultaneously.
-* **Comprehensive Analysis:** Automatically generates convergence trajectories, temperature schedules, connected route maps, and performance comparison charts.
-* **Exact Baseline:** Includes an integrated **Gurobi Optimizer** module (optional) to calculate the optimality gap against the proven mathematical solution.
+* **Comprehensive Analysis:** Automatically generates convergence trajectories, temperature schedules, route maps, and performance comparison charts.
+* **Exact Baseline:** Includes an integrated **Gurobi Optimizer** module to compare the optimality gap and speed against the proven mathematical solution.
 
 ## 🛠️ Technologies & Libraries
 
@@ -26,14 +26,14 @@ The solver operates on a geometric cooling schedule (`T_new = T_old * alpha`). T
 
 1.  **Candidate Lists:** Distance matrices are pre-computed, and nearest-neighbor lists are cached to reduce lookup time from `O(N^2)` to `O(N)`.
 2.  **Hybridization:** Every accepted Metropolis move is refined using a deterministic 2-opt descent.
-3.  **Stagnation Recovery:** If the objective function does not improve for *K* iterations, the system perturbs the current solution (4-opt random kick) and resets the temperature to a percentage of the initial heat.
+3.  **Stagnation Recovery:** If the objective function does not improve for *K* iterations, the system perturbs the current solution by applying **multiple random swaps** (determined by the `strength` parameter) and resets the temperature to a percentage of the initial heat.
 
 ## 📊 Setup & Installation
 
 1.  **Clone this repository:**
     ```bash
-    git clone [https://github.com/yourusername/tsp-enhanced-sa.git](https://github.com/yourusername/tsp-enhanced-sa.git)
-    cd tsp-enhanced-sa
+    git clone [https://github.com/Mohammed-Alanazii/CS616_PROJECT.git](https://github.com/Mohammed-Alanazii/CS616_PROJECT.git)
+    cd CS616_PROJECT
     ```
 2.  **Install dependencies:**
     ```bash
@@ -78,13 +78,10 @@ This project was developed as a capstone implementation for the Traveling Salesm
 * **Attribution:** The visualization code was adapted from Dr. Mahdi's instructional materials `Hands-on` and open-source repositories to facilitate robust benchmarking.
 * **References:**
   - Dr. Mahdi's Hands-On Files: [Heuristic Session Students](https://drive.google.com/file/d/1AlO-Slr-Y0nKd8b9tk5OUpqOpkEiS2Iw/view?usp=share_link) & [Assignment 2](https://drive.google.com/file/d/1nJJV4gtpycp7uRexjFw8L1svZHqbPHyd/view?usp=share_link) 
-  - TSPLIB Library: [http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/)
-  - Gurobi Optimizer: [https://www.gurobi.com/](https://www.gurobi.com/)
-  - Numba Documentation: [https://numba.pydata.org/](https://numba.pydata.org/)
-  - Joblib Documentation: [https://joblib.readthedocs.io/](https://joblib.readthedocs.io/)
-
-## 📝 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+  - TSPLIB Library: [TSPLIP95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/)
+  - Gurobi Optimizer: [Gurobi](https://www.gurobi.com/)
+  - Numba Documentation: [Numba](https://numba.pydata.org/)
+  - Joblib Documentation: [Joblib](https://joblib.readthedocs.io/)
 
 ## Troubleshooting & Support
 If you encounter any issues running the notebook or have questions about the implementation, please check the following:
@@ -94,11 +91,29 @@ If you encounter any issues running the notebook or have questions about the imp
 * Consult the documentation for the libraries used.
 * If problems persist, feel free to open an issue in this repository.
 
+## Changelog
+- **2025-11-01:** Project proposal submission.
+- **2025-11-15:** Initial implementation of Nearest Neighbor, 2-opt local search, Developed basic Simulated Annealing framework
+- **2025-11-20:** Implemented Enhanced Simulated Annealing with reheating strategy.
+- **2025-11-21:** Candidate List optimization for local search speed-up and reduced time complexity.
+- **2025-11-25:** Integrated Numba for JIT compilation of 2-opt local search.
+- **2025-12-26:** Integrated Gurobi Optimizer for exact solutions and benchmarking.
+- **2025-12-27:** Added parallel execution using Joblib for multiple TSP instances.
+- **2025-12-01:** Developed comprehensive visualization dashboard for results analysis.
+- **2025-12-04:** Finalized documentation and code comments for clarity.
+
+## 📌 Important Note
+The Candidate List optimization mentioned above is a new addition to the original project proposal. This enhancement was implemented to improve the efficiency of the local search process by reducing the time complexity of nearest neighbor lookups. The source and inspiration for this optimization have been duly noted in the references section.
+
+### Special Thanks to Dr. Mahdi for his continuous support, valuable resources, and guidance throughout the semester.
+
+## This project made by Mohammed M. Alanazi
+**with the guidance of Dr. Mahdi Khemakhem.**   
 
 ## 📬 Contact
 For questions or collaboration opportunities, please reach out to Mohammed M. Alanazi at m.alenezi1994@gmail.com, or visit my GitHub profile: [https://github.com/Mohammed-Alanazii](https://github.com/Mohammed-Alanazii) or open an issue in this repository.
 
-
-
-
-# CS616_PROJECT
+### Thank You for Exploring My Project!
+### feel free to star⭐ the repository if you found it useful.
+### for more projects visit my GitHub profile: [My GitHub](https://github.com/Mohammed-Alanazii)
+### Happy Coding! 🚀
