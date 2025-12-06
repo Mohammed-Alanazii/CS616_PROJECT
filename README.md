@@ -28,11 +28,29 @@ The solver operates on a geometric cooling schedule (`T_new = T_old * alpha`). T
 2.  **Hybridization:** Every accepted Metropolis move is refined using a deterministic 2-opt descent.
 3.  **Stagnation Recovery:** If the objective function does not improve for *K* iterations, the system perturbs the current solution by applying **multiple random swaps** (determined by the `strength` parameter) and resets the temperature to a percentage of the initial heat.
 
+## Project Proposal
+The original project proposal document can be found [Here] (https://github.com/Mohammed-Alanazii/CS616_PROJECT/blob/main/CS616_Project_Proposal_MOHAMMED_ALANAZI.pdf). It outlines the motivation, objectives, and planned methodology for this implementation.
+
+## Project Overview
+The project consists of the following main components:
+* **Nearest Neighbor Heuristic:** Generates an initial feasible solution quickly.
+* **2-opt Local Search:** Improves solutions by iteratively reverses segments to reduce tour length.
+* **Pure Simulated Annealing:** Implements the classic SA algorithm for baseline comparison.
+* **Enhanced Simulated Annealing:** The proposed hybrid algorithm with reheating, 2-opt local search and perturbation strategies.
+* **Gurobi Optimizer Integration:** Solves TSP instances exactly for benchmarking.
+* **Visualization Module:** Generates plots for convergence, temperature schedules, and route maps.
+* **Excel Exporter:** Compiles results into an Excel file for easy analysis.
+
+## Project Goals
+* Implement and validate the Enhanced Simulated Annealing algorithm on benchmark TSP instances.
+* Compare performance against Nearest Neighbor, Local Search, and Pure Simulated Annealing.
+* Analyze solution quality, convergence speed, and computational efficiency.
+
 ## 📊 Setup & Installation
 
 1.  **Clone this repository:**
     ```bash
-    git clone [https://github.com/Mohammed-Alanazii/CS616_PROJECT.git](https://github.com/Mohammed-Alanazii/CS616_PROJECT.git)
+    git clone https://github.com/Mohammed-Alanazii/CS616_PROJECT.git
     cd CS616_PROJECT
     ```
 2.  **Install dependencies:**
@@ -53,6 +71,7 @@ Open the Jupyter Notebook (`main.ipynb`) and run all cells. The pipeline will:
 ## 📂 Project Structure
 
 ```text
+├── CS616_Project_Proposal_MOHAMMED_ALANAZI.pdf  # Project proposal document
 ├── main.ipynb               # Main executable notebook
 ├── data/
 │   └── tsplib_instances/    # Benchmark .tsp files (e.g., eil51.tsp)
@@ -69,6 +88,9 @@ Open the Jupyter Notebook (`main.ipynb`) and run all cells. The pipeline will:
 
 ## 📈 Results Overview
 The final results, including total distances, optimality gaps, and runtimes for each algorithm across all TSP instances, are compiled in `results/tsp_final_results.xlsx`. Visualizations such as convergence plots and route maps are saved in the `results/figures/` directory.
+
+**Note on Result Stability:**
+The reported results are based on single-run experiments. Due to the probabilistic nature of the algorithm and parallel processing variances, you may observe slight deviations in the final gap percentages ($\pm 0.5\%$) when re-running the notebook. This is standard behavior for stochastic optimization methods constrained by **execution time limits**.
 
 ## 🎓 Academic Integrity & Acknowledgments
 
@@ -111,7 +133,7 @@ The Candidate List optimization mentioned above is a new addition to the origina
 **with the guidance of Dr. Mahdi Khemakhem.**   
 
 ## 📬 Contact
-For questions or collaboration opportunities, please reach out to Mohammed M. Alanazi at m.alenezi1994@gmail.com, or visit my GitHub profile: [https://github.com/Mohammed-Alanazii](https://github.com/Mohammed-Alanazii) or open an issue in this repository.
+For questions or collaboration opportunities, please reach out to Mohammed M. Alanazi at m.alenezi1994@gmail.com, or open an issue in this repository.
 
 ### Thank You for Exploring My Project!
 ### feel free to star⭐ the repository if you found it useful.
