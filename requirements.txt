@@ -1,0 +1,16 @@
+# Data Manipulation & Math
+numpy
+pandas
+openpyxl
+
+# TSP & Optimization
+tsplib95
+numba
+gurobipy  # Optional: Requires a valid Gurobi license
+
+# Visualization
+matplotlib
+seaborn
+
+# Parallel Processing
+joblib
