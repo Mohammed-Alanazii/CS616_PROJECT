@@ -15,7 +15,7 @@ This project implements a hybrid **Enhanced Simulated Annealing (ESA)** algorith
 The project is built using the following scientific computing stack:
 
 * **Core:** `Python 3.13`, `NumPy`, `Pandas`
-* **Optimization:** `Numba` (JIT Compilation), `Gurobipy` (Linear Programming)
+* **Optimization:** `Numba` (JIT Compilation), `Gurobipy` (MIP Programming)
 * **Data Handling:** `tsplib95` (Instance parsing)
 * **Visualization:** `Matplotlib`, `Seaborn`
 * **Concurrency:** `Joblib`, `Multiprocessing`
@@ -29,7 +29,7 @@ The solver operates on a geometric cooling schedule (`T_new = T_old * alpha`). T
 3.  **Stagnation Recovery:** If the objective function does not improve for *K* iterations, the system perturbs the current solution by applying **multiple random swaps** (determined by the `strength` parameter) and resets the temperature to a percentage of the initial heat.
 
 ## Project Proposal
-The original project proposal document can be found [Here] (https://github.com/Mohammed-Alanazii/CS616_PROJECT/blob/main/CS616_Project_Proposal_MOHAMMED_ALANAZI.pdf). It outlines the motivation, objectives, and planned methodology for this implementation.
+The original project proposal document can be found [Here](https://github.com/Mohammed-Alanazii/CS616_PROJECT/blob/main/CS616_Project_Proposal_MOHAMMED_ALANAZI.pdf). It outlines the motivation, objectives, and planned methodology for this implementation.
 
 ## Project Overview
 The project consists of the following main components:
@@ -89,8 +89,22 @@ Open the Jupyter Notebook (`main.ipynb`) and run all cells. The pipeline will:
 ## 📈 Results Overview
 The final results, including total distances, optimality gaps, and runtimes for each algorithm across all TSP instances, are compiled in `results/tsp_final_results.xlsx`. Visualizations such as convergence plots and route maps are saved in the `results/figures/` directory.
 
-**Note on Result Stability:**
-The reported results are based on single-run experiments. Due to the probabilistic nature of the algorithm and parallel processing variances, you may observe slight deviations in the final gap percentages ($\pm 0.5\%$) when re-running the notebook. This is standard behavior for stochastic optimization methods constrained by **execution time limits**.
+> ⚠️ **Note on Result Stability:**
+> The reported results are based on single-run experiments. Due to the probabilistic nature of the algorithm and parallel processing variances, you may observe slight deviations in the final gap percentages ($\pm 0.5\%$) when re-running the notebook. This is standard behavior for stochastic optimization methods constrained by **execution time limits**.
+
+## 🚀 Contributions & Future Work
+
+### Contributions
+1.  **Hybrid Architecture Design:** Developed a robust optimization pipeline that effectively couples probabilistic global exploration (Simulated Annealing) with deterministic local refinement (2-opt), solving the exploration-exploitation trade-off.
+2.  **Adaptive Stagnation Recovery:** Engineered a dynamic "Reheating" mechanism that monitors search progress and automatically resets parameters to force escapes from local optima traps.
+3.  **Systematic Benchmark Analysis:** Conducted a comprehensive empirical evaluation on 10 diverse TSPLIB instances, providing clear evidence of the speed-vs-quality trade-off against an exact solver (Gurobi).
+
+### Future Improvements
+To further close the optimality gap on very large instances, the following enhancements are proposed:
+* **Double Bridge Perturbation:** Replacing random swaps with "Double Bridge" (4-opt) moves, which are topologically harder for 2-opt to undo, potentially leading to better escape trajectories.
+* **3-opt Operator:** Incorporating 3-opt moves alongside 2-opt. While computationally expensive ($O(N^3)$), it can untangle complex knots that 2-opt cannot resolve.
+* **Guided Local Search (GLS):** Implementing penalties for frequently used edges in local optima to force the algorithm into new regions without relying solely on randomness.
+* **Reinforcement Learning (RL):** Integrating an RL agent to dynamically tune parameters (cooling rate, perturbation strength) in real-time based on the search state.
 
 ## 🎓 Academic Integrity & Acknowledgments
 
@@ -123,9 +137,6 @@ If you encounter any issues running the notebook or have questions about the imp
 - **2025-12-27:** Added parallel execution using Joblib for multiple TSP instances.
 - **2025-12-01:** Developed comprehensive visualization dashboard for results analysis.
 - **2025-12-04:** Finalized documentation and code comments for clarity.
-
-## 📌 Important Note
-The Candidate List optimization mentioned above is a new addition to the original project proposal. This enhancement was implemented to improve the efficiency of the local search process by reducing the time complexity of nearest neighbor lookups. The source and inspiration for this optimization have been duly noted in the references section.
 
 ### Special Thanks to Dr. Mahdi for his continuous support, valuable resources, and guidance throughout the semester.
 
